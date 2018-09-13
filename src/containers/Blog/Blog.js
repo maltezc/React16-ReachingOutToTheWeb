@@ -8,7 +8,8 @@ import './Blog.css';
 
 class Blog extends Component {
     state = {
-        posts: []
+        posts: [],
+        selectedPostId: null
     }
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/posts') // cant put this in a const variable because it is constantly getting data from server
@@ -24,17 +25,28 @@ class Blog extends Component {
                 // console.log(response);
             })
     }
+
+    postSelectedHandler = (id) => {
+        this.setState({selectedPostId: id});
+    }
+
+
+
     render () {
         const posts = this.state.posts.map(post =>{
-            return <Post key={post.id} title={post.title} author={post.author}/>
+            return <Post
+                key={post.id}
+                title={post.title}
+                author={post.author}
+                clicked={() => this.postSelectedHandler(post.id)}/>
         })
         return (
             <div>
                 <section className="Posts">
-                    {posts} /*pulls array of posts from post constant*/
+                    {posts} {/*pulls array of posts from post constant*/}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.selectedPostId}/>
                 </section>
                 <section>
                     <NewPost />
