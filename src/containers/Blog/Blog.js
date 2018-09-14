@@ -14,7 +14,7 @@ class Blog extends Component {
 
     }
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/posts') // cant put this in a const variable because it is constantly getting data from server
+        axios.get('/posts') // cant put this in a const variable because it is constantly getting data from server
             .then(response => {
                 const posts = response.data.slice(0,4);
                 const updatedPosts = posts.map(post => {
