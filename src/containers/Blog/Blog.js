@@ -40,7 +40,8 @@ class Blog extends Component {
                 <Switch> {/*allows react to only render the first one it matches*/}
                     {this.state.auth ? <Route path="/new-post" component={NewPost} />: null}
                     <Route path="/posts" component={Posts}/>
-                    <Redirect from='/' to='/posts' />
+                    <Route render ={() => <h1>Not Found</h1>}/> {/*This is a catch all for all unknown routes. Should always be at end of list. cant work with redirect / */}
+                    {/*<Redirect from='/' to='/posts' />*/}
                     {/*<Route path="/" component={Posts}/>*/}
 
                 </Switch>
